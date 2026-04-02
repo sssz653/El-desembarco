@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Desembarco | Hamburguesas & Pollo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *{font-family:'Inter',sans-serif;font-feature-settings:"cv02","cv03","cv04","cv11"}
+        ::selection{background:rgba(245,158,11,.3);color:#fef3c7}
+        .reveal{opacity:0;transform:translateY(30px) scale(.98);transition:all .8s cubic-bezier(.16,1,.3,1);filter:blur(10px)}
+        .reveal.active{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+        .hero-gradient{background:linear-gradient(to bottom,rgba(5,5,5,.15),rgba(5,5,5,.05),#050505)}
+        .text-gradient{background:linear-gradient(to bottom,#FFF,#FFF,rgba(255,255,255,.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .text-gradient-warm{background:linear-gradient(135deg,#fbbf24,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .glow-amber{box-shadow:0 0 25px rgba(245,158,11,.25)}
+        .glow-amber-strong{box-shadow:0 0 40px rgba(245,158,11,.2),0 0 80px rgba(245,158,11,.08)}
+        @keyframes ping{75%,100%{transform:scale(2);opacity:0}}
+        .ping-anim{animation:ping 1s cubic-bezier(0,0,.2,1) infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        .float-anim{animation:float 6s ease-in-out infinite}
+        @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+        .scroll-ind{animation:bounce 2s infinite}
+        .nav-blur{backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+        .star-f{color:#FBBF24}.star-e{color:rgba(255,255,255,.12)}
+        .review-card{transition:all .4s cubic-bezier(.16,1,.3,1)}
+        .review-card:hover{border-color:rgba(245,158,11,.15);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+        .menu-item{transition:all .3s ease}
+        .menu-item:hover{border-color:rgba(245,158,11,.15);background:rgba(245,158,11,.03)}
+        .gallery-item{transition:all .5s cubic-bezier(.16,1,.3,1)}
+        .gallery-item:hover{transform:scale(1.03);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+        .gallery-item:hover .gal-overlay{opacity:1}
+        .gal-overlay{opacity:0;transition:opacity .3s ease}
+        .food-card-img{transition:transform .7s cubic-bezier(.16,1,.3,1)}
+        .menu-item:hover .food-card-img{transform:scale(1.1)}
+        ::-webkit-scrollbar{width:6px}
+        ::-webkit-scrollbar-track{background:#050505}
+        ::-webkit-scrollbar-thumb{background:rgba(245,158,11,.2);border-radius:3px}
+        ::-webkit-scrollbar-thumb:hover{background:rgba(245,158,11,.35)}
+    </style>
+</head>
+<body class="bg-[#050505] text-white overflow-x-hidden">
+
+<div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-amber-900/8 rounded-full pointer-events-none" style="filter:blur(120px);opacity:.5;mix-blend-mode:screen;z-index:-1"></div>
+<div class="fixed bottom-0 right-0 w-[400px] h-[400px] bg-orange-900/5 rounded-full pointer-events-none" style="filter:blur(100px);opacity:.4;mix-blend-mode:screen;z-index:-1"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 w-full z-50 nav-blur bg-black/70 border-b border-amber-500/[.06]">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3 group">
+            <div class="relative">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center glow-amber">
+                    <span class="iconify text-white text-base" data-icon="ph:sailboat-fill"></span>
+                </div>
+                <div class="absolute inset-0 rounded-xl bg-amber-500 opacity-0 group-hover:opacity-40 blur-lg transition-opacity duration-500"></div>
+            </div>
+            <div>
+                <span class="font-bold text-sm tracking-tight">EL DESEMBARCO</span>
+                <span class="hidden sm:block text-[10px] text-amber-500/60 uppercase tracking-widest">Hamburguesas & Pollo</span>
+            </div>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#inicio" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Inicio</a>
+            <a href="#nosotros" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Nosotros</a>
+            <a href="#menu" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Carta</a>
+            <a href="#galeria" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Fotos</a>
+            <a href="#resenas" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Reseñas</a>
+            <a href="#ubicacion" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Ubicación</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <a href="https://www.google.com/maps/place/El+Desembarco+Nordelta/@-34.3916246,-58.6613086,17z/" target="_blank" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-black text-xs font-bold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all glow-amber">
+                <span class="iconify text-sm" data-icon="ph:map-pin-fill"></span>Cómo llegar
+            </a>
+            <button id="mobileBtn" class="md:hidden p-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span class="iconify text-xl" data-icon="ph:list-bold"></span>
+            </button>
+        </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden bg-black/95 nav-blur border-t border-amber-500/[.06]">
+        <div class="px-6 py-4 flex flex-col gap-3">
+            <a href="#inicio" class="text-sm text-slate-400 hover:text-amber-400 py-2 ml">Inicio</a>
+            <a href="#nosotros" class="text-sm text-slate-400 hover:text-amber-400 py-2 ml">Nosotros</a>
+            <a href="#menu" class="text-sm text-slate-400 hover:text-amber-400 py-2 ml">Carta</a>
+            <a href="#galeria" class="text-sm text-slate-400 hover:text-amber-400 py-2 ml">Fotos</a>
+            <a href="#resenas" class="text-sm text-slate-400 hover:text-amber-400 py-2 ml">Reseñas</a>
+            <a href="#ubicacion" class="text-sm text-slate-400 hover:text-amber-400 py-2 ml">Ubicación</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO — sin imagen, solo fondo oscuro puro -->
+<section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]">
+    <div class="hero-gradient absolute inset-0"></div>
+
+    <div class="absolute top-[20%] left-[8%] float-anim opacity-[.04]"><span class="iconify text-8xl text-amber-400" data-icon="ph:hamburger-fill"></span></div>
+    <div class="absolute bottom-[30%] right-[6%] float-anim opacity-[.03]" style="animation-delay:3s"><span class="iconify text-7xl text-amber-400" data-icon="ph:fire-fill"></span></div>
+    <div class="absolute top-[60%] left-[15%] float-anim opacity-[.025]" style="animation-delay:5s"><span class="iconify text-6xl text-amber-400" data-icon="ph:sailboat-fill"></span></div>
+
+    <div class="relative z-10 text-center px-6 pt-32 pb-20 md:pt-48 md:pb-32 max-w-5xl mx-auto">
+        <div class="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-500/[.15] bg-amber-500/[.05] mb-8">
+            <span class="relative flex h-2 w-2">
+                <span class="ping-anim absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+            </span>
+            <span class="text-xs font-medium text-amber-300/80 tracking-wide">Nordelta · Tigre · Buenos Aires</span>
+        </div>
+
+        <h1 class="reveal text-gradient text-5xl md:text-7xl lg:text-[5.5rem] font-black tracking-tighter leading-[.95] mb-4" style="transition-delay:100ms">EL DESEMBARCO</h1>
+        <p class="reveal text-lg md:text-xl text-amber-400/80 font-semibold tracking-widest uppercase mb-6" style="transition-delay:200ms">Hamburguesas & Pollo</p>
+        <p class="reveal text-base md:text-lg text-slate-400 font-light leading-relaxed max-w-2xl mx-auto mb-10" style="transition-delay:300ms">Burgers jugosas, pollo crujiente y papas fritas que se hacen esperar. El sabor casero que llega hasta tu mesa. Que se entere hasta el vecino.</p>
+
+        <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4" style="transition-delay:400ms">
+            <a href="#menu" class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-black text-sm font-bold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all glow-amber-strong">
+                Ver la carta
+                <span class="iconify group-hover:translate-x-.5 transition-transform" data-icon="ph:arrow-right-bold"></span>
+            </a>
+            <a href="#resenas" class="group inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/[.1] text-white text-sm font-medium rounded-full hover:bg-white/10 hover:border-white/[.2] transition-all">
+                <span class="iconify" data-icon="ph:star-fill"></span>
+                4.5 en Google
+            </a>
+        </div>
+
+        <div class="reveal mt-16 flex flex-col items-center gap-3" style="transition-delay:500ms">
+            <div class="flex items-center gap-1">
+                <span class="iconify text-2xl star-f" data-icon="ph:star-fill"></span>
+                <span class="iconify text-2xl star-f" data-icon="ph:star-fill"></span>
+                <span class="iconify text-2xl star-f" data-icon="ph:star-fill"></span>
+                <span class="iconify text-2xl star-f" data-icon="ph:star-fill"></span>
+                <span class="iconify text-2xl star-f" data-icon="ph:star-half-fill"></span>
+            </div>
+            <p class="text-sm text-slate-500">1.247 reseñas · <span class="text-slate-400">"Seguimos desembarcando"</span></p>
+        </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-ind">
+        <span class="iconify text-2xl text-amber-500/30" data-icon="ph:caret-down"></span>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="border-y border-amber-500/[.06] bg-[#0a0908]">
+    <div class="max-w-7xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="reveal text-center"><p class="text-2xl md:text-3xl font-black">4.5<span class="text-amber-500">★</span></p><p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Rating Google</p></div>
+        <div class="reveal text-center" style="transition-delay:100ms"><p class="text-2xl md:text-3xl font-black">1.2K+</p><p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Reseñas</p></div>
+        <div class="reveal text-center" style="transition-delay:200ms"><p class="text-2xl md:text-3xl font-black">8+</p><p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Años</p></div>
+        <div class="reveal text-center" style="transition-delay:300ms"><p class="text-2xl md:text-3xl font-black">200+</p><p class="text-xs text-slate-500 mt-1 uppercase tracking-wider">Capacidad</p></div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="nosotros" class="py-24 md:py-32 relative">
+    <div class="absolute top-20 right-0 w-80 h-80 bg-amber-900/5 rounded-full pointer-events-none" style="filter:blur(100px)"></div>
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div class="reveal">
+                <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-[#0f0d0b] border border-amber-500/[.08] relative">
+                    <img src="https://z-cdn-media.chatglm.cn/files/a21dff40-9d5d-4152-b2f2-090cdb0e46ac.png?auth_key=1874927259-5be22dc73c404c4fa5f10e5b7468832b-0-bc404ff3f676d681ebebcb495ac63a17" alt="Hamburguesa El Desembarco" class="w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 nav-blur border border-amber-500/[.1]">
+                        <span class="iconify text-amber-400 text-sm" data-icon="ph:map-pin-fill"></span>
+                        <span class="text-xs text-amber-200/80">Nordelta, Tigre</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="reveal">
+                    <span class="text-xs font-mono text-amber-500 tracking-wider uppercase mb-4 block">Nuestra Historia</span>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight mb-6">Que se entere <span class="text-gradient-warm">hasta el vecino</span></h2>
+                </div>
+                <div class="reveal" style="transition-delay:100ms">
+                    <p class="text-slate-400 font-light leading-relaxed mb-4">El Desembarco nació con una idea simple: hacer hamburguesas y pollo que valgan la pena. Sin posturas, sin humo. Carne de verdad, pan casero, salsas hechas en casa y papas fritas crocantes. Punto.</p>
+                    <p class="text-slate-400 font-light leading-relaxed mb-8">Hoy somos parte de la familia de Nordelta. La gente viene, come, y vuelve. Algunos piden delivery y se lo llevan hasta la casa del vecino. Y eso nos hace feliz. Seguimos desembarcando.</p>
+                </div>
+                <div class="reveal flex flex-wrap gap-2" style="transition-delay:200ms">
+                    <span class="px-3 py-1.5 text-xs rounded-full border border-amber-500/[.1] bg-amber-500/[.05] text-amber-300/80">🍔 Hamburguesas Artesanales</span>
+                    <span class="px-3 py-1.5 text-xs rounded-full border border-amber-500/[.1] bg-amber-500/[.05] text-amber-300/80">🍗 Pollo Crujiente</span>
+                    <span class="px-3 py-1.5 text-xs rounded-full border border-amber-500/[.1] bg-amber-500/[.05] text-amber-300/80">🍟 Papas Fritas</span>
+                    <span class="px-3 py-1.5 text-xs rounded-full border border-amber-500/[.1] bg-amber-500/[.05] text-amber-300/80">📦 Take Away</span>
+                    <span class="px-3 py-1.5 text-xs rounded-full border border-amber-500/[.1] bg-amber-500/[.05] text-amber-300/80">🚗 Delivery</span>
+                    <span class="px-3 py-1.5 text-xs rounded-full border border-amber-500/[.1] bg-amber-500/[.05] text-amber-300/80">☀️ Terraza</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-24 md:py-32 bg-[#0a0908] relative">
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-amber-900/5 rounded-full pointer-events-none" style="filter:blur(100px)"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center mb-16">
+            <div class="reveal">
+                <span class="text-xs font-mono text-amber-500 tracking-wider uppercase mb-4 block">La Carta</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight">Lo que nos <span class="text-gradient-warm">hace famosos</span></h2>
+                <p class="text-slate-500 font-light mt-4 max-w-xl mx-auto">Nada de vueltas. Buena carne, buen pollo, buenas papas. Lo simple bien hecho.</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="reveal menu-item rounded-2xl border border-white/[.06] bg-white/[.02] p-5 flex gap-5">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 bg-[#0f0d0b]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/db41c710-8d2c-440a-a691-29c538f908d2.png?auth_key=1874927259-03767b696c4345539cc18e34ee549108-0-f597c78822fca564d9f588a9ed2428ba" alt="Doble Cheddar" class="w-full h-full object-cover food-card-img" loading="lazy">
+                </div>
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold tracking-tight mb-1">Doble Cheddar</h3>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed">Doble medallón de carne, doble cheddar derretido, lechuga, tomate y salsa casera. La que no falla.</p>
+                    </div>
+                    <span class="inline-block self-start mt-2 px-2 py-0.5 text-[10px] uppercase tracking-wider text-amber-400/80 bg-amber-500/10 rounded-full font-semibold">⭐ Más vendida</span>
+                </div>
+            </div>
+
+            <div class="reveal menu-item rounded-2xl border border-white/[.06] bg-white/[.02] p-5 flex gap-5" style="transition-delay:100ms">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 bg-[#0f0d0b]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/2dc671ae-64a6-4653-9f78-98a5d75e020f.png?auth_key=1874927259-060204ec3a574a1ebeb1da7590d17918-0-36306ffba754eef6baa46bbf05f21988" alt="Burger con Huevo" class="w-full h-full object-cover food-card-img" loading="lazy">
+                </div>
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold tracking-tight mb-1">Burger con Huevo</h3>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed">Medallón de carne, huevo frito, queso, lechuga, tomate y salsa especial. Para los que quieren más.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal menu-item rounded-2xl border border-white/[.06] bg-white/[.02] p-5 flex gap-5" style="transition-delay:200ms">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 bg-[#0f0d0b]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/20ad2d50-ae02-40f9-83e0-1dbafd18d4cd.png?auth_key=1874927259-0442e121f31a4709a417614ed785f919-0-a9df773bf7948073bd0eb0347660fd35" alt="Pollo Crujiente" class="w-full h-full object-cover food-card-img" loading="lazy">
+                </div>
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold tracking-tight mb-1">Pollo Crujiente</h3>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed">Presas de pollo empanizadas, doradas y crujientes. Con papas fritas y dos salsas para dippear.</p>
+                    </div>
+                    <span class="inline-block self-start mt-2 px-2 py-0.5 text-[10px] uppercase tracking-wider text-amber-400/80 bg-amber-500/10 rounded-full font-semibold">🔥 Popular</span>
+                </div>
+            </div>
+
+            <div class="reveal menu-item rounded-2xl border border-white/[.06] bg-white/[.02] p-5 flex gap-5" style="transition-delay:300ms">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 bg-[#0f0d0b]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/8fa58b9f-84ba-489d-81a6-85dc95ba5424.png?auth_key=1874927259-4a91cc305a7b426ba9a42e720e6cbe7e-0-543e466f7e5df3ea7c7262a645b58ace" alt="Chicken Tenders" class="w-full h-full object-cover food-card-img" loading="lazy">
+                </div>
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold tracking-tight mb-1">Chicken Tenders</h3>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed">Tiras de pollo tiernas con rebozado dorado. Papas fritas y salsas BBQ y miel mostaza.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal menu-item rounded-2xl border border-white/[.06] bg-white/[.02] p-5 flex gap-5">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 bg-[#0f0d0b]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/743eeba7-cfa5-4c50-89e8-a181093014a0.png?auth_key=1874927259-b1397ddb665e424990279ca616bd037b-0-48bbb5bd1e04e15ffbbec819b7a69629" alt="Sándwich" class="w-full h-full object-cover food-card-img" loading="lazy">
+                </div>
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold tracking-tight mb-1">Sándwich Clásico</h3>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed">Pan brioche con carne, huevo frito, lechuga y salsa. Simple, completo y casero.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal menu-item rounded-2xl border border-white/[.06] bg-white/[.02] p-5 flex gap-5" style="transition-delay:100ms">
+                <div class="w-28 h-28 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0 bg-[#0f0d0b]">
+                    <img src="https://z-cdn-media.chatglm.cn/files/fae6003e-d1c7-4bae-9f77-96eaf5b3f99a.png?auth_key=1874927259-4c02d5bb220648318923c15841bdcff3-0-f3cd3921c672efcd1c0ea251def5234d" alt="Combo Box" class="w-full h-full object-cover food-card-img" loading="lazy">
+                </div>
+                <div class="flex-1 min-w-0 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold tracking-tight mb-1">Combo Box</h3>
+                        <p class="text-sm text-slate-500 font-light leading-relaxed">Burger + papas + bebida. Todo en una caja. Ideal para llevar. "Ser parte de la familia Desembarcó".</p>
+                    </div>
+                    <span class="inline-block self-start mt-2 px-2 py-0.5 text-[10px] uppercase tracking-wider text-amber-400/80 bg-amber-500/10 rounded-full font-semibold">📦 Para llevar</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal text-center mt-10">
+            <a href="https://wa.me/5493489123456" target="_blank" class="inline-flex items-center gap-2 text-sm text-amber-400/70 hover:text-amber-400 transition-colors">
+                Consultá precios y hacé tu pedido por WhatsApp
+                <span class="iconify" data-icon="ph:arrow-right-bold"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galeria" class="py-24 md:py-32 relative">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <div class="reveal">
+                <span class="text-xs font-mono text-amber-500 tracking-wider uppercase mb-4 block">Galería</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight">Fotos <span class="text-gradient-warm">reales</span>, sin filtros</h2>
+                <p class="text-slate-500 font-light mt-4">Así se ven nuestros platos. Lo que ves es lo que comes.</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+            <div class="reveal gallery-item rounded-xl overflow-hidden aspect-square cursor-pointer relative bg-[#0f0d0b]">
+                <img src="https://z-cdn-media.chatglm.cn/files/db41c710-8d2c-440a-a691-29c538f908d2.png?auth_key=1874927259-03767b696c4345539cc18e34ee549108-0-f597c78822fca564d9f588a9ed2428ba" alt="Doble Cheddar" class="w-full h-full object-cover" loading="lazy">
+                <div class="gal-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4"><span class="text-sm font-semibold">Doble Cheddar</span></div>
+            </div>
+            <div class="reveal gallery-item rounded-xl overflow-hidden aspect-[3/4] md:row-span-2 cursor-pointer relative bg-[#0f0d0b]" style="transition-delay:100ms">
+                <img src="https://z-cdn-media.chatglm.cn/files/522af0bc-b221-44df-a433-994736d39111.png?auth_key=1874927259-c9b032ce65c946549c74fd630058f0ad-0-a17d21f199c7b308468fcf8d50b30941" alt="Terraza" class="w-full h-full object-cover" loading="lazy">
+                <div class="gal-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+                    <div><span class="text-sm font-semibold block">Terraza al aire libre</span><span class="text-xs text-amber-400/80">Comer afuera es otra experiencia</span></div>
+                </div>
+            </div>
+            <div class="reveal gallery-item rounded-xl overflow-hidden aspect-square cursor-pointer relative bg-[#0f0d0b]" style="transition-delay:200ms">
+                <img src="https://z-cdn-media.chatglm.cn/files/20ad2d50-ae02-40f9-83e0-1dbafd18d4cd.png?auth_key=1874927259-0442e121f31a4709a417614ed785f919-0-a9df773bf7948073bd0eb0347660fd35" alt="Pollo Crujiente" class="w-full h-full object-cover" loading="lazy">
+                <div class="gal-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4"><span class="text-sm font-semibold">Pollo Crujiente</span></div>
+            </div>
+            <div class="reveal gallery-item rounded-xl overflow-hidden aspect-square cursor-pointer relative bg-[#0f0d0b]" style="transition-delay:100ms">
+                <img src="https://z-cdn-media.chatglm.cn/files/8fa58b9f-84ba-489d-81a6-85dc95ba5424.png?auth_key=1874927259-4a91cc305a7b426ba9a42e720e6cbe7e-0-543e466f7e5df3ea7c7262a645b58ace" alt="Chicken Tenders" class="w-full h-full object-cover" loading="lazy">
+                <div class="gal-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4"><span class="text-sm font-semibold">Chicken Tenders</span></div>
+            </div>
+            <div class="reveal gallery-item rounded-xl overflow-hidden aspect-square cursor-pointer relative bg-[#0f0d0b]" style="transition-delay:200ms">
+                <img src="https://z-cdn-media.chatglm.cn/files/743eeba7-cfa5-4c50-89e8-a181093014a0.png?auth_key=1874927259-b1397ddb665e424990279ca616bd037b-0-48bbb5bd1e04e15ffbbec819b7a69629" alt="Sándwich" class="w-full h-full object-cover" loading="lazy">
+                <div class="gal-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4"><span class="text-sm font-semibold">Sándwich Clásico</span></div>
+            </div>
+            <div class="reveal gallery-item rounded-xl overflow-hidden aspect-[2/1] md:col-span-3 cursor-pointer relative bg-[#0f0d0b]" style="transition-delay:300ms">
+                <img src="https://z-cdn-media.chatglm.cn/files/a21dff40-9d5d-4152-b2f2-090cdb0e46ac.png?auth_key=1874927259-5be22dc73c404c4fa5f10e5b7468832b-0-bc404ff3f676d681ebebcb495ac63a17" alt="En la mano" class="w-full h-full object-cover" loading="lazy">
+                <div class="gal-overlay absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+                    <div><span class="text-sm font-semibold block">Así se come</span><span class="text-xs text-amber-400/80">Con las manos, como tiene que ser</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="resenas" class="py-24 md:py-32 bg-[#0a0908] relative">
+    <div class="absolute top-20 left-0 w-72 h-72 bg-yellow-900/5 rounded-full pointer-events-none" style="filter:blur(100px)"></div>
+    <div class="max-w-7xl mx-auto px-6 relative">
+        <div class="text-center mb-16">
+            <div class="reveal">
+                <span class="text-xs font-mono text-amber-500 tracking-wider uppercase mb-4 block">Reseñas de Google</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight">Lo que dice la <span class="text-gradient-warm">gente</span></h2>
+                <div class="flex items-center justify-center gap-3 mt-6">
+                    <div class="flex items-center gap-1">
+                        <span class="iconify text-lg star-f" data-icon="ph:star-fill"></span>
+                        <span class="iconify text-lg star-f" data-icon="ph:star-fill"></span>
+                        <span class="iconify text-lg star-f" data-icon="ph:star-fill"></span>
+                        <span class="iconify text-lg star-f" data-icon="ph:star-fill"></span>
+                        <span class="iconify text-lg star-f" data-icon="ph:star-half-fill"></span>
+                    </div>
+                    <span class="font-bold">4.5</span>
+                    <span class="text-slate-500 text-sm">· 1.247 reseñas</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal max-w-md mx-auto mb-16">
+            <div class="space-y-2.5">
+                <div class="flex items-center gap-3"><span class="text-xs text-slate-400 w-3">5</span><div class="flex-1 h-2.5 bg-white/[.05] rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style="width:62%"></div></div><span class="text-xs text-slate-500 w-10 text-right">62%</span></div>
+                <div class="flex items-center gap-3"><span class="text-xs text-slate-400 w-3">4</span><div class="flex-1 h-2.5 bg-white/[.05] rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style="width:23%"></div></div><span class="text-xs text-slate-500 w-10 text-right">23%</span></div>
+                <div class="flex items-center gap-3"><span class="text-xs text-slate-400 w-3">3</span><div class="flex-1 h-2.5 bg-white/[.05] rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style="width:8%"></div></div><span class="text-xs text-slate-500 w-10 text-right">8%</span></div>
+                <div class="flex items-center gap-3"><span class="text-xs text-slate-400 w-3">2</span><div class="flex-1 h-2.5 bg-white/[.05] rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style="width:4%"></div></div><span class="text-xs text-slate-500 w-10 text-right">4%</span></div>
+                <div class="flex items-center gap-3"><span class="text-xs text-slate-400 w-3">1</span><div class="flex-1 h-2.5 bg-white/[.05] rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full" style="width:3%"></div></div><span class="text-xs text-slate-500 w-10 text-right">3%</span></div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="reveal review-card rounded-2xl border border-white/[.06] bg-white/[.02] p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-sm font-bold flex-shrink-0">M</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium">María González</p><p class="text-xs text-slate-500">Hace 2 semanas</p></div>
+                    <div class="flex gap-0.5 flex-shrink-0"><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span></div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">"La doble cheddar es una locura. El queso se derrame por todos lados, la carne tiene buen sabor y las papas están crocantes. Fuimos en familia y todos quedamos contentos."</p>
+            </div>
+
+            <div class="reveal review-card rounded-2xl border border-white/[.06] bg-white/[.02] p-6" style="transition-delay:100ms">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-sm font-bold flex-shrink-0">F</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium">Federico Ramírez</p><p class="text-xs text-slate-500">Hace 1 mes</p></div>
+                    <div class="flex gap-0.5 flex-shrink-0"><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-e" data-icon="ph:star-fill"></span></div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">"Muy buenas hamburguesas para Nordelta. La de huevo es mi favorita. El pollo crujiente también está muy bueno. A veces tarda un poco en el delivery, pero la comida compensa."</p>
+            </div>
+
+            <div class="reveal review-card rounded-2xl border border-white/[.06] bg-white/[.02] p-6" style="transition-delay:200ms">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-sm font-bold flex-shrink-0">L</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium">Luciana Torres</p><p class="text-xs text-slate-500">Hace 3 semanas</p></div>
+                    <div class="flex gap-0.5 flex-shrink-0"><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span></div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">"Pedimos el combo box para llevar y llegó todo perfecto. La burger caliente, las papas crocantes. La caja tiene un diseño copado con el mapa. Se nota que le ponen onda al detalle."</p>
+            </div>
+
+            <div class="reveal review-card rounded-2xl border border-white/[.06] bg-white/[.02] p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-sm font-bold flex-shrink-0">D</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium">Diego Morales</p><p class="text-xs text-slate-500">Hace 2 meses</p></div>
+                    <div class="flex gap-0.5 flex-shrink-0"><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-half-fill"></span></div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">"Vinimos con los chicos y les encantó el pollo crujiente. Las salsas son buenas, especialmente la de miel y mostaza. El lugar es cómodo y la terraza muy linda para comer afuera."</p>
+            </div>
+
+            <div class="reveal review-card rounded-2xl border border-white/[.06] bg-white/[.02] p-6" style="transition-delay:100ms">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-sm font-bold flex-shrink-0">V</div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium">Valentina Iglesias</p><p class="text-xs text-slate-500">Hace 1 semana</p></div>
+                    <div class="flex gap-0.5 flex-shrink-0"><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span><span class="iconify text-sm star-f" data-icon="ph:star-fill"></span></div>
+                </div>
+                <p class="text-sm text-slate-400 font-light leading-relaxed">"La mejor burger de Nordelta, punto. La doble cheddar es de otra planta. El pan suave, la carne jugosa, y las papas con ese punto crocante. Volveré todas las semanas."</p>
+            </div>
+        </div>
+
+        <div class="reveal text-center mt-12">
+            <a href="https://www.google.com/maps/place/El+Desembarco+Nordelta/@-34.3916246,-58.6613086,17z/" target="_blank" class="group inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/[.1] text-white text-sm font-medium rounded-full hover:bg-white/10 hover:border-amber-500/[.2] transition-all">
+                Ver todas las reseñas en Google
+                <span class="iconify group-hover:translate-x-.5 group-hover:-translate-y-.5 transition-transform" data-icon="ph:arrow-up-right-bold"></span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- QUOTE -->
+<section class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-amber-900/8 via-transparent to-transparent pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-6 text-center relative">
+        <div class="reveal">
+            <span class="iconify text-5xl text-amber-500/15 mb-6 block mx-auto" data-icon="ph:quotes-fill"></span>
+            <blockquote class="text-2xl md:text-3xl font-light tracking-tight leading-relaxed text-slate-300">"Que se entere hasta el vecino... <span class="text-amber-400 font-medium">seguimos desembarcando</span>. No necesitamos palabras fancy, necesitamos que la burger hable sola."</blockquote>
+            <div class="mt-8 flex items-center justify-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-sm font-bold"><span class="iconify" data-icon="ph:sailboat-fill"></span></div>
+                <div class="text-left"><p class="text-sm font-medium">Equipo Desembarco</p><p class="text-xs text-slate-500">Nordelta, Tigre</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INFO -->
+<section class="py-24 md:py-32 bg-[#0a0908]">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="reveal rounded-2xl border border-white/[.06] bg-white/[.02] p-8">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/[.15] flex items-center justify-center mb-5"><span class="iconify text-xl text-amber-400" data-icon="ph:clock-fill"></span></div>
+                <h3 class="text-xl font-bold tracking-tight mb-4">Horarios</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between"><span class="text-slate-500">Lunes</span><span class="text-red-400/80">Cerrado</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Mar - Jue</span><span class="text-slate-300">12:00–16:00 / 19:00–23:30</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Viernes</span><span class="text-slate-300">12:00–16:00 / 19:00–00:30</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Sábado</span><span class="text-slate-300">12:00–00:30</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Domingo</span><span class="text-slate-300">12:00–17:00</span></div>
+                </div>
+                <div class="mt-5 flex items-center gap-2">
+                    <span class="relative flex h-2 w-2"><span class="ping-anim absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" id="pingDot"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500" id="statusDot"></span></span>
+                    <span class="text-xs text-green-400" id="openStatus">Abierto ahora</span>
+                </div>
+            </div>
+
+            <div class="reveal rounded-2xl border border-white/[.06] bg-white/[.02] p-8" style="transition-delay:100ms">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/[.15] flex items-center justify-center mb-5"><span class="iconify text-xl text-amber-400" data-icon="ph:phone-fill"></span></div>
+                <h3 class="text-xl font-bold tracking-tight mb-4">Contacto</h3>
+                <div class="space-y-4 text-sm">
+                    <a href="tel:+5493489123456" class="flex items-center gap-3 text-slate-400 hover:text-amber-400 transition-colors group"><span class="iconify text-slate-500 group-hover:text-amber-400 transition-colors" data-icon="ph:phone"></span>+54 9 3489 123-4567</a>
+                    <a href="mailto:info@eldesembarco.com" class="flex items-center gap-3 text-slate-400 hover:text-amber-400 transition-colors group"><span class="iconify text-slate-500 group-hover:text-amber-400 transition-colors" data-icon="ph:envelope"></span>info@eldesembarco.com</a>
+                    <a href="https://www.instagram.com/eldesembarconordelta/" target="_blank" class="flex items-center gap-3 text-slate-400 hover:text-amber-400 transition-colors group"><span class="iconify text-slate-500 group-hover:text-amber-400 transition-colors" data-icon="ph:instagram-logo"></span>@eldesembarconordelta</a>
+                    <a href="https://wa.me/5493489123456" target="_blank" class="flex items-center gap-3 text-slate-400 hover:text-green-400 transition-colors group"><span class="iconify text-slate-500 group-hover:text-green-400 transition-colors" data-icon="ph:whatsapp-logo"></span>Pedí por WhatsApp</a>
+                </div>
+                <div class="mt-6">
+                    <button onclick="doReserve()" class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black text-sm font-bold rounded-xl hover:from-amber-400 hover:to-orange-400 transition-all glow-amber">
+                        <span class="iconify" data-icon="ph:whatsapp-logo-fill"></span>Hacé tu pedido
+                    </button>
+                </div>
+            </div>
+
+            <div class="reveal rounded-2xl border border-white/[.06] bg-white/[.02] p-8" style="transition-delay:200ms">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/[.15] flex items-center justify-center mb-5"><span class="iconify text-xl text-amber-400" data-icon="ph:info-fill"></span></div>
+                <h3 class="text-xl font-bold tracking-tight mb-4">Lo que tenés que saber</h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center gap-3 text-slate-400"><span class="iconify text-amber-400" data-icon="ph:check-circle-fill"></span>Estacionamiento propio</div>
+                    <div class="flex items-center gap-3 text-slate-400"><span class="iconify text-amber-400" data-icon="ph:check-circle-fill"></span>Terraza al aire libre</div>
+                    <div class="flex items-center gap-3 text-slate-400"><span class="iconify text-amber-400" data-icon="ph:check-circle-fill"></span>Delivery y take away</div>
+                    <div class="flex items-center gap-3 text-slate-400"><span class="iconify text-amber-400" data-icon="ph:check-circle-fill"></span>Menú infantil</div>
+                    <div class="flex items-center gap-3 text-slate-400"><span class="iconify text-amber-400" data-icon="ph:check-circle-fill"></span>Acepta todas las tarjetas</div>
+                    <div class="flex items-center gap-3 text-slate-400"><span class="iconify text-amber-400" data-icon="ph:check-circle-fill"></span>Mercado Pago / Transferencia</div>
+                    <div class="flex items-center gap-3 text-slate-400"><span class="iconify text-amber-400" data-icon="ph:check-circle-fill"></span>Franquicias disponibles</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAP -->
+<section id="ubicacion" class="py-24 md:py-32 relative">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="reveal">
+                <span class="text-xs font-mono text-amber-500 tracking-wider uppercase mb-4 block">Ubicación</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight leading-tight">Vení a <span class="text-gradient-warm">desembarcar</span></h2>
+                <p class="text-slate-500 font-light mt-4 max-w-xl mx-auto">Estamos en Nordelta, Tigre. Fácil de llegar, difícil de irse sin pedir más.</p>
+            </div>
+        </div>
+
+        <div class="reveal rounded-2xl overflow-hidden border border-amber-500/[.08] shadow-2xl relative" style="min-height:450px;background:linear-gradient(135deg,#0a0908,#0f0d0b)">
+            <div id="mapFallback" class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[#0a0908]" style="display:none">
+                <span class="iconify text-6xl text-amber-500/30" data-icon="ph:map-pin-fill"></span>
+                <p class="text-slate-400 text-sm">Cargando mapa...</p>
+            </div>
+            <iframe id="mapFrame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.5!2d-58.663497!3d-34.391625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bca179250a1b15%3A0x2684fef5bb1ba309!2sEl%20Desembarco%20Nordelta!5e0!3m2!1ses-419!2sar!4v1743000000000!5m2!1ses-419!2sar" width="100%" height="450" style="border:0;filter:invert(92%) hue-rotate(180deg) brightness(.9) contrast(.85) sepia(.15)" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" onload="document.getElementById('mapFallback').style.display='none'" onerror="document.getElementById('mapFallback').style.display='flex'"></iframe>
+        </div>
+
+        <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+            <a href="https://www.google.com/maps/dir//El+Desembarco+Nordelta/@-34.3916246,-58.6613086,17z/" target="_blank" class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-black text-sm font-bold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all glow-amber">
+                <span class="iconify" data-icon="ph:navigation-arrow-fill"></span>Indicaciones para llegar
+            </a>
+            <a href="https://www.google.com/maps/place/El+Desembarco+Nordelta/@-34.3916246,-58.6613086,17z/" target="_blank" class="group inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/[.1] text-white text-sm font-medium rounded-full hover:bg-white/10 transition-all">
+                <span class="iconify" data-icon="ph:google-logo"></span>Ver en Google Maps
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-32 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-amber-900/15 via-transparent to-transparent pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-900/15 rounded-full pointer-events-none" style="filter:blur(120px)"></div>
+    <div class="relative max-w-4xl mx-auto px-6 text-center">
+        <div class="reveal">
+            <div class="inline-flex items-center gap-2 mb-6"><span class="iconify text-3xl text-amber-500" data-icon="ph:hamburger-fill"></span></div>
+            <h2 class="text-4xl md:text-6xl font-black tracking-tighter leading-tight text-gradient mb-4">¿Se te antojó?</h2>
+            <p class="text-lg text-slate-400 font-light max-w-xl mx-auto mb-10">Pedí por WhatsApp, vení al local o buscanos en delivery. La burger te está esperando.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="doReserve()" class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-black text-sm font-bold rounded-full hover:from-amber-400 hover:to-orange-400 transition-all glow-amber-strong">
+                    <span class="iconify" data-icon="ph:whatsapp-logo-fill"></span>Pedí ahora
+                    <span class="iconify group-hover:translate-x-.5 transition-transform" data-icon="ph:arrow-right-bold"></span>
+                </button>
+                <a href="https://www.google.com/maps/place/El+Desembarco+Nordelta/@-34.3916246,-58.6613086,17z/" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-white/5 border border-white/[.1] text-white text-sm font-medium rounded-full hover:bg-white/10 transition-all">
+                    <span class="iconify" data-icon="ph:map-pin-fill"></span>Ir al local
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-amber-500/[.06] bg-[#0a0908]">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-4 gap-10">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center"><span class="iconify text-white text-base" data-icon="ph:sailboat-fill"></span></div>
+                    <div>
+                        <span class="font-bold text-sm tracking-tight">EL DESEMBARCO</span>
+                        <span class="block text-[10px] text-amber-500/50 uppercase tracking-widest">Seguimos desembarcando</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-500 font-light leading-relaxed max-w-sm mb-6">Hamburguesas y pollo que valen la pena. En Nordelta, Tigre. Con delivery, take away y terraza para comer bien sin vueltas.</p>
+                <div class="flex items-center gap-3">
+                    <a href="https://www.instagram.com/eldesembarconordelta/" target="_blank" class="w-9 h-9 rounded-lg bg-white/[.05] border border-white/[.08] flex items-center justify-center text-slate-400 hover:text-amber-400 hover:border-amber-500/[.2] transition-all"><span class="iconify" data-icon="ph:instagram-logo"></span></a>
+                    <a href="#" class="w-9 h-9 rounded-lg bg-white/[.05] border border-white/[.08] flex items-center justify-center text-slate-400 hover:text-amber-400 hover:border-amber-500/[.2] transition-all"><span class="iconify" data-icon="ph:facebook-logo"></span></a>
+                    <a href="https://wa.me/5493489123456" target="_blank" class="w-9 h-9 rounded-lg bg-white/[.05] border border-white/[.08] flex items-center justify-center text-slate-400 hover:text-green-400 hover:border-green-500/[.2] transition-all"><span class="iconify" data-icon="ph:whatsapp-logo"></span></a>
+                    <a href="#" class="w-9 h-9 rounded-lg bg-white/[.05] border border-white/[.08] flex items-center justify-center text-slate-400 hover:text-red-400 hover:border-red-500/[.2] transition-all"><span class="iconify" data-icon="ph:tiktok-logo"></span></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-xs font-medium uppercase tracking-wider text-slate-500 mb-4">Navegación</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#inicio" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Inicio</a></li>
+                    <li><a href="#nosotros" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Nosotros</a></li>
+                    <li><a href="#menu" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Carta</a></li>
+                    <li><a href="#galeria" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Fotos</a></li>
+                    <li><a href="#resenas" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Reseñas</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs font-medium uppercase tracking-wider text-slate-500 mb-4">Más</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#ubicacion" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Ubicación</a></li>
+                    <li><a href="https://wa.me/5493489123456" target="_blank" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Pedidos</a></li>
+                    <li><a href="#" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Franquicias</a></li>
+                    <li><a href="#" class="text-sm text-slate-400 hover:text-amber-400 transition-colors">Trabaja con nosotros</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-white/[.06] flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-slate-600">© 2025 El Desembarco. Todos los derechos reservados.</p>
+            <p class="text-xs text-slate-600">franquicia@desembarcó.com · "Louédes ser parte de la familia"</p>
+        </div>
+    </div>
+</footer>
+
+<!-- TOAST -->
+<div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
+    <div class="px-5 py-3 rounded-xl bg-black/80 nav-blur border border-amber-500/[.15] text-sm text-amber-200 flex items-center gap-3 shadow-2xl">
+        <span class="iconify text-green-400" data-icon="ph:check-circle-fill"></span>
+        <span id="toastMsg">Mensaje</span>
+    </div>
+</div>
+
+<script>
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('active')})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+const mBtn=document.getElementById('mobileBtn'),mMenu=document.getElementById('mobileMenu');let mO=false;
+mBtn.onclick=()=>{mO=!mO;mMenu.classList.toggle('hidden');mBtn.innerHTML=mO?'<span class="iconify text-xl" data-icon="ph:x-bold"></span>':'<span class="iconify text-xl" data-icon="ph:list-bold"></span>'};
+document.querySelectorAll('.ml').forEach(l=>l.onclick=()=>{mMenu.classList.add('hidden');mO=false;mBtn.innerHTML='<span class="iconify text-xl" data-icon="ph:list-bold"></span>'});
+
+function updateStatus(){
+    const n=new Date(),d=n.getDay(),t=n.getHours()+n.getMinutes()/60;let o=false;
+    if(d===1)o=false;else if(d>=2&&d<=4)o=(t>=12&&t<=16)||(t>=19&&t<=23.5);else if(d===5)o=(t>=12&&t<=16)||(t>=19&&t<=24.5);else if(d===6)o=t>=12&&t<=24.5;else o=t>=12&&t<=17;
+    const s=document.getElementById('openStatus'),dot=document.getElementById('statusDot'),ping=document.getElementById('pingDot');
+    if(o){s.textContent='Abierto ahora';s.className='text-xs text-green-400';dot.className='relative inline-flex rounded-full h-2 w-2 bg-green-500';ping.className='ping-anim absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75'}
+    else{s.textContent='Cerrado ahora';s.className='text-xs text-red-400';dot.className='relative inline-flex rounded-full h-2 w-2 bg-red-500';ping.className='ping-anim absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75'}
+}
+updateStatus();setInterval(updateStatus,60000);
+
+function showToast(m){const t=document.getElementById('toast'),tm=document.getElementById('toastMsg');tm.textContent=m;t.classList.remove('hidden');t.style.opacity='0';t.style.transform='translateY(20px)';requestAnimationFrame(()=>{t.style.transition='all .3s ease';t.style.opacity='1';t.style.transform='translateY(0)'});setTimeout(()=>{t.style.opacity='0';t.style.transform='translateY(20px)';setTimeout(()=>t.classList.add('hidden'),300)},3000)}
+
+function doReserve(){showToast('Abriendo WhatsApp...');setTimeout(()=>{window.open('https://wa.me/5493489123456?text=Hola!%20Quiero%20hacer%20un%20pedido%20en%20El%20Desembarco%20Nordelta','_blank')},500)}
+
+const nav=document.querySelector('nav');
+window.addEventListener('scroll',()=>{nav.style.background=window.scrollY>50?'rgba(5,5,5,.9)':'rgba(0,0,0,.7)'});
+
+setTimeout(()=>{const f=document.getElementById('mapFrame');if(!f||f.style.display==='none')document.getElementById('mapFallback').style.display='flex'},5000);
+</script>
+</body>
+</html>
